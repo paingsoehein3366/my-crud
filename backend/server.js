@@ -7,6 +7,7 @@ const PORT = process.env.PORT || '';
 const router = require('./src/route/student.route');
 const { z } = require('zod');
 const envSchema = require('./src/schema/env.schema');
+const ApiError = require('./utils/apiError');
 app.use(express.json());
 app.use(cors());
 app.use(router);
@@ -22,7 +23,7 @@ function validateEnvVaribles() {
                   console.log("Missing invalid varibles");
             }
       }
-}
+};
 
 app.get('*', async (req, res) => {
       res.send('404 not page');
@@ -39,6 +40,19 @@ async function connectToDatabase() {
             console.log("Error while connecting to MongoDB: ", error);
       }
 };
+
+app.use((err, req, res, next) => {
+      if (err instanceof ApiError) {
+            res.status(err.statusCode).json({
+                  status: "fail",
+                  message: err.message
+            })
+      }
+});
+
+app.get('*', (req, res, next) => {
+      res.send(ApiError.notFound());
+});
 
 app.listen(PORT, () => {
       validateEnvVaribles();

@@ -14,8 +14,8 @@ class ApiError extends Error {
       static notFound(message = 'Invalid Endpoint') {
             return new ApiError(message, 404);
       }
-      static validation(message = 'Invalid Request', data = null) {
-            return new ApiError(message, 400, data);
+      static validation(message = 'Invalid Request',) {
+            return new ApiError(message, 400);
       }
 }
 

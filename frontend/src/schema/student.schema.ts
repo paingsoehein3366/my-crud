@@ -1,18 +1,27 @@
-import { z } from 'zod';
-
-export const validationsSchema = z.object({
-      name: z.string().min(1),
-      age: z.number(),
-      grade: z.string().min(1),
-      classRoom: z.string(),
-      mother: z.string().min(1),
-      MonAge: z.number(),
-      MonJob: z.string().min(1),
-      father: z.string().min(1),
-      DadAge: z.number(),
-      DadJob: z.string().min(1),
-      _id: z.string()
-});
-
-export type schemaPorp = z.infer<typeof validationsSchema>;
-
+interface Prop {
+      student: {},
+      errors: {}
+}
+export const validationsSchema = ({ student, errors }: Prop) => {
+      if (!student.name) {
+            errors.name = "Name is required!"
+      } if (!student.age) {
+            errors.age = "Age is required!"
+      } if (!student.grade) {
+            errors.grade = "Grade is required!"
+      } if (!student.father) {
+            errors.father = "Name is required!"
+      } if (!student.DadJob) {
+            errors.DadJob = "Job is required!"
+      } if (!student.DadAge) {
+            errors.DadAge = "Age is required!"
+      } if (!student.mother) {
+            errors.mother = "Name is required!"
+      } if (!student.MonJob) {
+            errors.MonJob = "Job is required!"
+      } if (!student.MonAge) {
+            errors.MonAge = "Age is required!"
+      } if (!student.classRoom) {
+            errors.classRoom = "Class room is required!"
+      }
+};

@@ -20,9 +20,11 @@ const Detail = () => {
       };
       const style = {
             display: "flex",
-            justifyContent: "space-between"
+            justifyContent: "space-between",
+            fontFamily: "Arial"
       };
-      const textStyle = { borderBottom: "1px solid" }
+      const fontFamily = { fontFamily: "sans-serif" }
+      const textStyle = { borderBottom: "1px solid green", fontFamily: "sans-serif" }
 
       return (
             <Box>
@@ -33,28 +35,29 @@ const Detail = () => {
                         {checkData?.map((item: any) => {
                               return (
                                     <Card key={item._id} sx={{ width: 300, display: "flex", flexDirection: "column", alignItems: "center", paddingY: 2 }}>
-                                          <CardMedia><AccountCircleIcon sx={{ fontSize: 200 }} /></CardMedia>
+                                          <CardMedia><AccountCircleIcon sx={{ fontSize: 200, color: "gray" }} /></CardMedia>
+                                          <Typography sx={{ borderBottom: "1px solid gray", width: 250, height: 1, mb: 1 }}></Typography>
                                           <CardActions sx={{ display: "flex", justifyContent: "space-between", width: "70%" }}>
-                                                <Box sx={{ display: "flex", flexDirection: "column", }}>
-                                                      <Typography >Student Name</Typography>
-                                                      <Typography >Student Age</Typography>
+                                                <Box sx={{ display: "flex", flexDirection: "column", color: "#484747" }}>
+                                                      <Typography sx={fontFamily}>Student Name</Typography>
+                                                      <Typography sx={fontFamily}>Student Age</Typography>
                                                       <Typography sx={textStyle}>Grade</Typography>
-                                                      <Typography >Father</Typography>
-                                                      <Typography >Age</Typography>
+                                                      <Typography sx={fontFamily}>Father</Typography>
+                                                      <Typography sx={fontFamily}>Age</Typography>
                                                       <Typography sx={textStyle}>Job</Typography>
-                                                      <Typography >Mother</Typography>
-                                                      <Typography >Age</Typography>
+                                                      <Typography sx={fontFamily}>Mother</Typography>
+                                                      <Typography sx={fontFamily}>Age</Typography>
                                                       <Typography sx={textStyle}>Job</Typography>
                                                 </Box>
                                                 <Box sx={{ display: "flex", flexDirection: "column" }}>
-                                                      <Typography >: {item.name}</Typography>
-                                                      <Typography >: {item.age}</Typography>
+                                                      <Typography sx={fontFamily}>: {item.name}</Typography>
+                                                      <Typography sx={fontFamily}>: {item.age}</Typography>
                                                       <Typography sx={textStyle}>: {item.grade}</Typography>
-                                                      <Typography >: {item.father}</Typography>
-                                                      <Typography >: {item.DadAge}</Typography>
+                                                      <Typography sx={fontFamily}>: {item.father}</Typography>
+                                                      <Typography sx={fontFamily}>: {item.DadAge}</Typography>
                                                       <Typography sx={textStyle}>: {item.DadJob}</Typography>
-                                                      <Typography >: {item.mother}</Typography>
-                                                      <Typography >: {item.MonAge}</Typography>
+                                                      <Typography sx={fontFamily}>: {item.mother}</Typography>
+                                                      <Typography sx={fontFamily}>: {item.MonAge}</Typography>
                                                       <Typography sx={textStyle}>: {item.MonJob}</Typography>
                                                 </Box>
                                           </CardActions>

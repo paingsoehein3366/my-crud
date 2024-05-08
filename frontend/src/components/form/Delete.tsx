@@ -16,7 +16,7 @@ const Delete = ({ open, setOpen }: Prop) => {
       };
       return (
             <Dialog open={open} onClose={setOpen}>
-                  <DialogTitle>Are you sure you want to delete?</DialogTitle>
+                  <DialogTitle sx={{ fontFamily: "sans-serif" }}>Are you sure you want to delete?</DialogTitle>
                   <DialogContent sx={{ display: "flex", justifyContent: "space-between" }}>
                         <Button variant="outlined" onClick={setOpen}>cencel</Button>
                         <Button variant="contained" color="error" onClick={deleteFunction}>delete</Button>
