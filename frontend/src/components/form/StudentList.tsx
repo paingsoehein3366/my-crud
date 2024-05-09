@@ -83,7 +83,16 @@ const StudentList = () => {
                                                       <TableCell sx={{ fontFamily: "sans-serif" }} align='right'>{row.classRoom}</TableCell>
                                                       <TableCell sx={{ fontFamily: "sans-serif" }} align='right'>{row.grade}</TableCell>
                                                       <TableCell sx={{ fontFamily: "sans-serif" }} align="right">
-                                                            <Link to={`detail/${row._id}`}>Detail</Link>
+                                                            <Link
+                                                                  to={`/${row._id}/detail`}
+                                                                  style={{
+                                                                        textDecoration: "none",
+                                                                        backgroundColor: "#4285f4",
+                                                                        padding: "8px",
+                                                                        borderRadius: "5px",
+                                                                        color: "#fff"
+                                                                  }}
+                                                            >Detail</Link>
                                                       </TableCell>
                                                 </TableRow>
                                           ))}

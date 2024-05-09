@@ -27,7 +27,17 @@ const CreateStudent = ({ open, setOpen }: Prop) => {
       const useMutation = useCreateStudent();
 
 
-      const style = { mt: 2, fontFamily: "sans-serif" };
+      const style = {
+            mt: 2,
+            fontFamily: "sans-serif",
+            "& .MuiOutlinedInput-root": {
+                  fontFamily: "sans-serif",
+                  // Class for the border around the input field
+                  "& .MuiOutlinedInput-notchedOutline": {
+                        border: "1px solid green"
+                  },
+            },
+      };
       const textStyle = { color: "red", fontSize: 13, fontFamily: "sans-serif" }
       const createStudent = async () => {
             const errors = {}

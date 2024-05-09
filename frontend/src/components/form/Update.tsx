@@ -21,7 +21,18 @@ const Update = ({ open, setOpen, }: Prop) => {
       console.log("studentData: ", studentData);
 
       const textStyle = { color: "red", fontSize: 13, fontFamily: "sans-serif" }
-      const style = { mt: 2, fontFamily: "sans-serif" };
+      const style = {
+            mt: 2,
+            fontFamily: "sans-serif",
+            "& .MuiOutlinedInput-root": {
+                  fontFamily: "sans-serif",
+                  // Class for the border around the input field
+                  "& .MuiOutlinedInput-notchedOutline": {
+                        borderColor: "#1876d2",
+                        borderWidth: "1px",
+                  },
+            },
+      };
       const client = new QueryClient();
       const update = () => {
             let student = studentData
@@ -46,7 +57,7 @@ const Update = ({ open, setOpen, }: Prop) => {
             <Dialog open={open} onClose={setOpen}>
                   <DialogContent>
                         <Box sx={{ display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
-                              <Typography variant="h5" sx={{ style }}>Update Student</Typography >
+                              <Typography variant="h5" sx={{ fontFamily: "sans-serif" }}>Update Student</Typography >
                               <Box sx={{ display: "flex", justifyContent: "center", marginY: 3 }}>
                                     <Box sx={{ display: "flex", flexDirection: "column" }}>
                                           <Typography sx={style}>Student</Typography>

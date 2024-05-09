@@ -17,7 +17,7 @@ function App() {
         <Routes>
           <Route path='*' element={<h1>404 not found page!</h1>} />
           <Route path='/' element={<StudentList />} />
-          <Route path='/detail/:id' element={<Detail />} />
+          <Route path='/:id/detail' element={<Detail />} />
         </Routes>
       </QueryClientProvider>
     </>

@@ -33,7 +33,7 @@ const Detail = () => {
                   <Box sx={{ display: "flex", justifyContent: "center", height: "80vh", alignItems: "center", flexDirection: "column" }}>
                         <Card key={data?.data._id} sx={{ width: 300, display: "flex", flexDirection: "column", alignItems: "center", paddingY: 2 }}>
                               <CardMedia><AccountCircleIcon sx={{ fontSize: 200, color: "gray" }} /></CardMedia>
-                              <Typography sx={{ borderBottom: "1px solid gray", width: 250, height: 1, mb: 1 }}></Typography>
+                              <Typography sx={{ borderBottom: "1px solid gray", width: 270, height: 1, mb: 1 }}></Typography>
                               <CardActions sx={{ display: "flex", justifyContent: "space-between", width: "70%" }}>
                                     <Box sx={{ display: "flex", flexDirection: "column", color: "#484747" }}>
                                           <Typography sx={fontFamily}>Student Name</Typography>
