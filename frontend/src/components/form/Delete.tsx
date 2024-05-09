@@ -1,5 +1,7 @@
 import { Button, Dialog, DialogContent, DialogTitle } from "@mui/material"
+import { QueryClient } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
+import { useDeleteStudent } from "../../api/student";
 import { fetcher } from "../../lib/axios";
 
 interface Prop {
@@ -7,12 +9,25 @@ interface Prop {
       setOpen: () => void
 }
 const Delete = ({ open, setOpen }: Prop) => {
-      const param = useParams();
+      const params = useParams();
       const navigate = useNavigate();
+      const client = new QueryClient();
+      const useMutation = useDeleteStudent();
       const deleteFunction = async () => {
-            await fetcher.delete(`/students/${param.id}`)
-                  .then(res => navigate('/students'))
-                  .catch(err => console.log(err));
+            // await fetcher.delete(`/students/${param.id}`)
+            //       .then(res => navigate('/students'))
+            //       .catch(err => console.log(err));
+            useMutation.mutate({ id: params.id }, {
+                  onSuccess: () => {
+                        client.invalidateQueries({
+                              queryKey: ['students']
+                        })
+                        navigate('/');
+                  },
+                  onError: () => {
+                        window.alert('error');
+                  }
+            })
       };
       return (
             <Dialog open={open} onClose={setOpen}>

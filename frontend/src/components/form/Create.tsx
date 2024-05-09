@@ -1,10 +1,8 @@
 import { Box, Button, Dialog, DialogContent, TextField, Typography } from "@mui/material";
 import { useState } from "react";
-import { useMutation, useQuery } from "react-query";
-import useStudent from "../../api/student";
-import { fetcher } from "../../lib/axios";
+import { useCreateStudent } from "../../api/student";
+import queryClient from "../../lib/query-client";
 import { validationsSchema } from "../../schema/student.schema";
-import { studentInfo } from "../../typing/type";
 
 interface Prop {
       open: boolean,
@@ -26,25 +24,32 @@ const CreateStudent = ({ open, setOpen }: Prop) => {
       });
       const [formErrors, setFormErrors] = useState({});
       const [errorMessage, setErrorMessage] = useState({});
-      const { isLoading, data } = useStudent();
+      const useMutation = useCreateStudent();
+
 
       const style = { mt: 2, fontFamily: "sans-serif" };
       const textStyle = { color: "red", fontSize: 13, fontFamily: "sans-serif" }
       const createStudent = async () => {
-            let student = studentData;
             const errors = {}
-            validationsSchema({ student, errors });
+            validationsSchema({ student: studentData, errors });
             setFormErrors(errors);
             if (Object.keys(errors).length > 0) return;
-            fetcher.post('/students', studentData)
-                  .then(res => setOpen())
-                  .catch(err => alert(err.response.data.message));
+            useMutation.mutate(studentData, {
+                  onSuccess: () => {
+                        queryClient.invalidateQueries({
+                              queryKey: ['students']
+                        })
+                        setOpen()
+                  },
+                  onError: (error) => {
+                        window.alert(error?.response?.data.message)
+                  }
+            })
       };
 
       const handleOnchange = (e: any) => {
             const { name, value } = (e.target);
             setStudentData({ ...studentData, [name]: value });
-            console.log("name:", name, "value:", value);
       };
 
       return (

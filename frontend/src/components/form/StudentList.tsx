@@ -9,13 +9,13 @@ import { Box, Button, TextField, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import CreateStudent from './Create';
-import useStudent from '../../api/student';
+import { useGetStudent } from '../../api/student';
 import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
 
 const StudentList = () => {
       const [open, setOpen] = useState(false);
-      const { data, isLoading, isError, error } = useStudent();
+      const { data, isLoading, isError } = useGetStudent(open);
       const [searchData, setSearchData] = useState("");
       const [searchValue, setSearchValue] = useState('')
 
@@ -23,14 +23,14 @@ const StudentList = () => {
             return <h1>Loading....</h1>
       };
       if (isError) {
-            return <h1>Server Error</h1>
+            return <h1>Server Error!</h1>
       };
       const searchFunction = (e: any) => {
             let lowerCase = e.target.value.toLowerCase();
             setSearchData(lowerCase);
             setSearchValue(e.target.value);
       };
-      const filterData = data?.data?.data.filter((item: any) => {
+      const filterData = data?.data?.filter((item: any) => {
             if (searchData === "") {
                   return item;
             } else {
@@ -76,7 +76,7 @@ const StudentList = () => {
                                     <TableBody>
                                           {filterData.map((row: any) => (
                                                 <TableRow
-                                                      key={row.name}
+                                                      key={row._id}
                                                       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                                 >
                                                       <TableCell sx={{ fontFamily: "sans-serif" }}>{row.name}</TableCell>

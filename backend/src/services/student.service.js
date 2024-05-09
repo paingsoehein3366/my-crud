@@ -9,19 +9,22 @@ exports.getStudentService = async () => {
       }
       return students;
 };
+exports.getOneStudent = async (id) => {
+      const student = await Students.findById(id);
+      if (!student) {
+            throw ApiError.notFound(student);
+      }
+      return student;
+}
 
 exports.createStudentService = async (body) => {
       const { name, age, grade, father, DadAge, DadJob, mother, MonAge, MonJob, classRoom } = body;
       Validation({ name, age, grade, father, DadAge, DadJob, mother, MonAge, MonJob, classRoom });
-      const students = await Students.create(body);
-      if (!students) {
-            throw ApiError.notFound(students);
-      };
-      return students;
+      const student = await Students.create(body);
+      return student;
 };
 
 exports.updateStudentService = async (id, body) => {
-      console.log("Body: ", body);
       const students = await Students.updateOne({ _id: id }, body);
       if (!students) {
             throw ApiError.notFound(students)
